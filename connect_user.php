@@ -24,7 +24,7 @@
         echo "<h2>Connexion à votre compte</h2>\n";
         echo "<form class='inputs' action ='valid_account.php' method='POST'>\n";
         echo "<label for='login'>Login</label>\n";
-        echo "<input type='text' id='login' name='login' class='login-input' autocomplete='off'>\n";
+        echo "<input type='text' id='login' name='login' class='login-input' autofocus autocomplete='off'>\n";
         echo "<label for='login'>Password</label>\n";
         echo "<input type='password' id='pwd' name='pwd' class='login-input' autocomplete='off'>\n";
         //echo "<a href='valid_account.php' id='btn-connect'>Connexion</a><br>";

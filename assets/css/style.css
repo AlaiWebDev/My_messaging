@@ -4,6 +4,7 @@
     user-select: none;
     
 }
+
 a:visited {
     color: unset;
   }
@@ -385,6 +386,7 @@ h5{
     height: fit-content;
     border:3px solid white;
     border-radius:10px;
+    font-family: 'Roboto Mono', monospace;
     background-color: dimgray;
 }
 .logos a{
