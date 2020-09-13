@@ -37,12 +37,12 @@
             $dest = $_POST['recipientsOK'];
             if ($value === "recipientsOK") {
                 for ($i = 0; $i < count($dest); $i++) {
-                    $msg = $msgTxt[0];
+                    $msg = $msgTxt;
                     $msg = trim($msg);
                     $msg = htmlentities($msg);
                     $desti = $dest[$i];
                     $ID_msg = $userconnected . "/" . $desti;
-                    $sql = "INSERT INTO chat(ID, pseudo, messages, ID_msg) VALUES ('0', '$desti', '$msg', '$ID_msg')";
+                    $sql = "INSERT INTO chat(ID, pseudo, messages, dates, ID_msg) VALUES ('0', '$desti', '$msg', '$today', '$ID_msg')";
                     try {
                         $req = $bdd->prepare($sql);
                         $req->execute();

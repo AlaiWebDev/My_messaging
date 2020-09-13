@@ -60,6 +60,8 @@ textarea{
     font-family: 'Source Code Pro', monospace;
     font-weight: 700;
     font-size: 1.1rem;
+    resize: none;
+    caret-color: transparent;
 }
 textarea::placeholder{
     font-size: 1rem;

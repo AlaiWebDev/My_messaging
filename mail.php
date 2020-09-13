@@ -42,7 +42,7 @@
             echo "<input type='text' readonly name='recipients'" . "value='" . $row['pseudo'] . "' class='senders' onclick='selectDest()'><br>";
             }
             echo "</div><div class='msg-window' autofocus>";
-            echo"<textarea name='txtmessage[]' placeholder='Saisissez votre message...' autofocus></textarea>";
+            echo"<textarea name='txtmessage' placeholder='Saisissez votre message...' autofocus></textarea>";
             echo "</div>";
             echo "<button id='btn-send'>ENVOYER</button>";
             echo "</form>";
