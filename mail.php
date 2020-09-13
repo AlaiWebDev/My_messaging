@@ -14,8 +14,10 @@
 
 <body>
     <?php
+    $usrConnected = $_GET['login'];
     //if (isset($_SESSION['logged']) && $_SESSION['logged'] === true) {
     if (isset($_GET['login']) && ($_GET['login'] !== "")) {
+        //include 'header-connected.php';
         include 'header-connected.php';
     } else {
         include 'header.php';
@@ -23,7 +25,7 @@
     ?>
     <div class="container">
         <?php
-        $usrConnected = $_GET['login'];
+        
         $_POST['usr'] = $usrConnected;
         $dsn = 'mysql:dbname=dwwm20061_chat;host=localhost';
         $user = 'root';

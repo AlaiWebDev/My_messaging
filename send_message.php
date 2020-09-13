@@ -46,8 +46,6 @@
                     try {
                         $req = $bdd->prepare($sql);
                         $req->execute();
-                        echo "<script>document.getElementById('message').innerText='Félicitations ! Votre compte a été créé. Vous pouvez vous connecter'</script>";
-                        echo "<script>document.getElementById('linkModal').click();</script>";
                     } catch (Exception $e) {
                         echo " Erreur " . $e->getMessage();
                     }

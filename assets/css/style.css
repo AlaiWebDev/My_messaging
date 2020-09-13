@@ -67,6 +67,21 @@ textarea::placeholder{
 .none{
     display:none;
 }
+#logo{
+    width: 10%;
+    height: 60%;
+    margin-left: 30px;
+    border-radius:5px;
+    border: 2px solid black;
+
+}
+#date-jour{
+    margin: auto;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+}
 #navbar-connect{
     text-decoration: none;
     margin: auto;
@@ -84,6 +99,7 @@ textarea::placeholder{
 #user-account{
     text-decoration: none;
     margin: auto;
+    width:15%;
     margin-right: 30px;
     margin-left: 0px;
     height: fit-content;
