@@ -2,12 +2,9 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Messaging DWW20061</title>
+<?php
+    include './head.php';
+    ?>
 </head>
 
 <body>
@@ -26,7 +23,7 @@
     </div>
     <a href="#oModal" id="linkModal">Ouvrir le popup</a>
     <?php
-    include 'header.php';
+    include './header.php';
     ?>
     <div class="container">
         <?php
@@ -70,13 +67,13 @@
                 $dbh = null;
             } else {
                 echo "<script>document.getElementById('message').innerText='Ce pseudo est déjà pris.'</script>";
-                echo "<script>document.getElementById('close').href='registration.php';</script>";
+                echo "<script>document.getElementById('close').href='./registration.php';</script>";
                 echo "<script>document.getElementById('linkModal').click();</script>";
                 $dbh = null;
             }
         } else {
             echo "<script>document.getElementById('message').innerText='Cette adresse email est déjà associée à un compte. Choisissez-en une autre ou connectez-vous au compte concerné.'</script>";
-                echo "<script>document.getElementById('close').href='registration.php';</script>";
+                echo "<script>document.getElementById('close').href='./registration.php';</script>";
                 echo "<script>document.getElementById('linkModal').click();</script>";
             $dbh = null;
         }
@@ -85,7 +82,7 @@
     </div>
 
     <?php
-    include 'footer.php';
+    include './footer.php';
     ?>
     <script src="./assets/js/jquery-3.2.1.js"></script>
     <script src="./assets/js/main.js"></script>

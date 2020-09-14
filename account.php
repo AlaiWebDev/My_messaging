@@ -25,18 +25,20 @@
             echo 'Connexion échouée : ' . $e->getMessage();
         }
         $usrConnected = $_COOKIE['CookieUser'];
-        echo "<form class='screen-window' action='./send_message.php' method='post'>";
+        echo "<form class='screen-window'>";
         echo "<div class='chat-window'>";
-        echo "<h4>Destinataire(s)</h4>";
-        echo "<div class='user-list'>";
-        foreach ($dbh->query("SELECT * FROM registration WHERE pseudo <> '$usrConnected'") as $row) {
-            echo "<input type='text' readonly name='recipients'" . " value='" . $row['pseudo'] . "' class='senders' onclick='selectDest()'><br>";
+        foreach ($dbh->query("SELECT * FROM chat WHERE pseudo = '$usrConnected' AND checked = FALSE") as $row){
+            echo "<script>newMessage()</script>";
+
         }
-        echo "</div><div class='msg-window' autofocus>";
-        echo "<textarea name='txtmessage' placeholder='Saisissez votre message...' autofocus></textarea>";
-        echo "</div></div>";
-        echo "<button id='btn-send'>ENVOYER</button>";
+        echo "</div>";
         echo "</form>";
+        if (!isset($row)) {
+        echo "<div>Pas de nouveau message</div>";
+        echo "</div>";
+        echo "</form>";
+        }
+        $dbh = null;
         ?>
     </div>
     <?php

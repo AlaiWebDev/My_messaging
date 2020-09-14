@@ -1,6 +1,6 @@
 *{
     box-sizing: border-box;
-    /*border:1px solid red;*/
+    .border:1px solid red;
     user-select: none;
     
 }
@@ -16,7 +16,7 @@ header{
     display: flex;
     justify-content: space-between;
     width:100vw;
-    height: 100%;
+    align-items: center;
     background-color: dimgray;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border:2px solid white;
@@ -47,7 +47,7 @@ h2{
     color:white;
     text-align: center;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 200px;
     opacity: 0.7;
 }
 h3{
@@ -67,12 +67,27 @@ textarea{
 textarea::placeholder{
     font-size: 1rem;
 }
+.screen-window{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin:auto;
+    align-items: center;
+    width: 45%;
+    height: 60%;
+}
+.screen-window h2{
+    margin: auto;
+}
+.middle{
+    margin:auto;
+}
 .none{
     display:none;
 }
 #logo{
-    width: 10%;
-    height: 60%;
+    display: flex;
+    width: 120px;
     margin-left: 30px;
     border-radius:5px;
     border: 2px solid black;
@@ -84,6 +99,10 @@ textarea::placeholder{
     font-weight: 600;
     text-transform: capitalize;
     text-align: center;
+}
+#account-connected{
+    text-transform: uppercase;
+    color:white;
 }
 #navbar-connect{
     text-decoration: none;
@@ -115,15 +134,15 @@ textarea::placeholder{
     font-weight: 800;
     border-radius:10px;
 }
+.acc-window{
+    margin-top: 10px;
+    height: 50%;
+    overflow-y: ;
+}
 #navbar-connect:hover{
     background-color: #94df24;
 }
-#mark-link{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-decoration: none;
-}
+
 #log-unknown{
     color : red;
     font-weight: 700;
@@ -138,9 +157,9 @@ textarea::placeholder{
     display: flex;
     flex-direction: column;
     width:30%;
-    height: 50%;
+    height: 70%;
     padding:10px;
-    margin-left: 30px;
+    margin: auto;
     align-items: center;
     border: 2px solid white;
     color: white;
@@ -156,7 +175,7 @@ h4{
     height: 40px;
     text-align: center;
     font-size: 1.1rem;
-    margin-left:20px;
+    margin:auto;
     color:white;
 }
 h5{
@@ -224,20 +243,62 @@ h5{
     flex-flow: column wrap;
     font-family: 'Roboto Mono', monospace;
     margin: auto;
-    margin-top: 120px;
-    width:45%;
-    height: 65%;
+    width:90%;
+    height: 90%;
     border: 1px solid lightslategray;
+}
+.msg-received{
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    overflow-y: scroll;
+    align-items: center;
+    margin: auto;
+    margin-top: 10px;
+    padding:10px;
+    width:90%;
+    height: 90%;
+    border: 1px solid lightslategray;
+    color : red;
+    font-weight: 700;
+}
+.msg-detail {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    width : 95%;
+    height: 100%;
+    background-color: peru;
+    color:white;
+    border-radius: 5px;
+}
+.msg-exp{
+    text-align: left;
+    width: fit-content;
+    font-size: larger;
+    margin-left: 5px;
+    color: slateblue;
+}
+.msg-txt{
+    text-align: right;
+    width: fit-content;
+    margin-left: 15px;
+}
+.msg-date{
+    color: black;
+    width: fit-content;
+    font-size: small;
+    opacity: 0.8;
+    margin-left: 5px;
 }
 .login-window{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 20px;
     width:45%;
-    height: 70%;
-    border: 1px solid lightslategray;
+    height: 97%;
 }
 .inputs{
     display: flex;
@@ -266,7 +327,18 @@ h5{
 .inputs span a:hover{
     color:lightslategray;
 }
-
+.userMsgList{
+    color:white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: auto;
+    margin-top: 100px;
+    width:45%;
+    height: 70%;
+    border: 1px solid lightslategray;
+}
 .new-window{
     display: flex;
     flex-direction: column;
@@ -335,6 +407,8 @@ h5{
     background-color: rgb(148, 223, 36);
 }
 .container{
+    display: flex;
+    flex-direction: column;
     background-image: url("../img/background.png");
     background-size: cover;
     background-position: center;
@@ -346,6 +420,11 @@ h5{
 }
 .blink {
     animation: blink 3s infinite;
+    text-shadow: 5px 2px 4px red;
+    transition: box-shadow 1s;
+  }
+.blink2 {
+    animation: blink 1.5s infinite;
     text-shadow: 5px 2px 4px red;
     transition: box-shadow 1s;
   }

@@ -2,22 +2,18 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>Messaging DWW20061</title>
+<?php
+    include './head.php';
+    ?>
 </head>
 
 <body>
     <?php
-    include 'header.php';
+    include './header.php';
     ?>
     <div class="container">
         <?php
-        echo "<div class='new-window'><form class='new-user' action ='create_user.php' method='POST'>\n";
+        echo "<div class='screen-window'><form class='new-user' action ='./create_user.php' method='POST'>\n";
         echo "<label for='lastname'>Nom</label>\n";
         echo "<input type='text' name='lastname' class='new-input' autocomplete='off'>\n";
         echo "<label for='firstname'>Prénom</label>\n";
@@ -32,7 +28,7 @@
         ?>
     </div>
     <?php
-    include 'footer.php';
+    include './footer.php';
     ?>
     <script src="./assets/js/jquery-3.2.1.js"></script>
     <script src="./assets/js/main.js"></script>
