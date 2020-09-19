@@ -7,44 +7,38 @@
     include './check_session.php';
     ?>
 </head>
-
 <body>
     <?php
-    include_once './header-connected.php';
+    include_once './header_connected.php';
     ?>
     <div class="container">
         <?php
         //$_POST['usr'] = $usrConnected;
-        $dsn = 'mysql:dbname=dwwm20061_chat;host=localhost';
-        $user = 'root';
-        $password = '';
-        try {
-            $dbh = new PDO($dsn, $user, $password);
-            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            echo 'Connexion échouée : ' . $e->getMessage();
-        }
+        include './function_connect.php';
+        $pdo = Database::connect();
         $usrConnected = $_COOKIE['CookieUser'];
         echo "<form class='screen-window'>";
         echo "<div class='chat-window'>";
-        foreach ($dbh->query("SELECT * FROM chat WHERE pseudo = '$usrConnected' AND checked = FALSE") as $row){
+        foreach ($pdo->query("SELECT * FROM chat WHERE pseudo = '$usrConnected' AND checked = 0") as $row) {
             echo "<script>newMessage()</script>";
+        }
 
-        }
-        echo "</div>";
-        echo "</form>";
         if (!isset($row)) {
-        echo "<div>Pas de nouveau message</div>";
-        echo "</div>";
-        echo "</form>";
+            echo "<h4 class='empty'>Pas de nouveau message</h4>";
+            echo "</div>";
+            echo "</form>";
+        } else {
+            echo "</div></form>";
         }
-        $dbh = null;
+        $pdo = Database::disconnect();
         ?>
     </div>
     <?php
     include './footer.php';
     ?>
-    
+    <script type="text/javascript" src="./assets/js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery.scrollTo-min.js"></script>
+
 </body>
 
 </html>

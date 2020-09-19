@@ -1,4 +1,10 @@
 <?php
+//session_start();
+//if (isset($_SESSION['pseudo'])) {
+//    echo "Connecté en tant que" . $_SESSION['pseudo']. "</h2></b>";
+//} else {
+//    header('location: ./connect_user.php');
+//}
 $usrConnected = $_COOKIE['CookieUser'];
 echo "<header>";
 echo "<img id='logo' src='./assets/img/YouneedAlain.png' alt='YouNeedMe'>";
@@ -8,7 +14,7 @@ setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
 $dateTimeZone = new DateTimeZone('Europe/Paris');
 $dateTime = new DateTime('now', $dateTimeZone);
 $today = strftime("%A %d %B %Y ") . $dateTime -> format('H\hi');
-echo "<span id='date-jour'>" . strftime("%A %d %B %Y") . "<br>Connecté en tant que<span id='account-connected'> " . $usrConnected . "</span></span>";//"<br>" . $dateTime -> format('H\hi') . "</span>";
+echo "<span id='date-jour'>" . strftime("%A %d %B %Y") . "<br><span id='txt-uncapitalize'>Connecté en tant que <span id='account-connected'>" . $usrConnected  . "</span></span></span>";//"<br>" . $dateTime -> format('H\hi') . "</span>";
 //echo "<span >Connecté en tant que " . $usrConnected . "</span>";//"<br>" . $dateTime -> format('H\hi') . "</span>";
 echo "<a href ='./close_session.php' id='navbar-connect' class='cx-active'>DECONNEXION</a>";       
 echo "</navbar>"; 

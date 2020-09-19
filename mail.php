@@ -9,39 +9,34 @@
 </head>
 
 <body>
+
     <?php
-    include_once './header-connected.php';
+    include_once './header_connected.php';
     ?>
     <div class="container">
         <?php
         //$_POST['usr'] = $usrConnected;
-        $dsn = 'mysql:dbname=dwwm20061_chat;host=localhost';
-        $user = 'root';
-        $password = '';
-        try {
-            $dbh = new PDO($dsn, $user, $password);
-            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            echo 'Connexion échouée : ' . $e->getMessage();
-        }
+        include './function_connect.php';
+        $pdo = Database::connect();
         $usrConnected = $_COOKIE['CookieUser'];
         echo "<form class='screen-window' action='./send_message.php' method='post'>";
         echo "<div class='chat-window'>";
         echo "<h4>Destinataire(s)</h4>";
-        echo "<div class='user-list'>";
-        foreach ($dbh->query("SELECT * FROM registration WHERE pseudo <> '$usrConnected'") as $row) {
+        echo "<div class='user-list' id='user-liste'>";
+        foreach ($pdo->query("SELECT * FROM registration WHERE pseudo <> '$usrConnected'") as $row) {
             echo "<input type='text' readonly name='recipients'" . " value='" . $row['pseudo'] . "' class='senders' onclick='selectDest()'><br>";
         }
-        echo "</div><div class='msg-window' autofocus>";
+        echo "</div><span id='arrow-top'>&#x25B2;</span><span id='arrow-bot'>&#x25BC;</span><div class='msg-window' autofocus>";
         echo "<textarea name='txtmessage' placeholder='Saisissez votre message...' autofocus></textarea>";
         echo "</div></div>";
-        echo "<button id='btn-send'>ENVOYER</button>";
+        echo "<button class='btn'>ENVOYER</button>";
         echo "</form>";
         ?>
     </div>
     <?php
     include './footer.php';
     ?>
+    
     
 </body>
 

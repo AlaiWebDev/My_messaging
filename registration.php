@@ -24,7 +24,7 @@
         echo "<input type='email' name='email' class='new-input' autocomplete='off'>\n";
         echo "<label for='pwd'>Mot de passe</label>\n";
         echo "<input type='text' name='pwd' class='new-input' autocomplete='off'>\n";
-        echo "<button id='btn-new' type='submit'>Valider</button>\n</form>\n</div>\n";
+        echo "<button class='btn' type='submit'>Valider</button>\n</form>\n</div>\n";
         ?>
     </div>
     <?php
