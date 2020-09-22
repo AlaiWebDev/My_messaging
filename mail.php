@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <?php
     include_once './header_connected.php';
     ?>
@@ -23,8 +22,12 @@
         echo "<div class='chat-window'>";
         echo "<h4>Destinataire(s)</h4>";
         echo "<div class='user-list' id='user-liste'>";
-        foreach ($pdo->query("SELECT * FROM registration WHERE pseudo <> '$usrConnected'") as $row) {
-            echo "<input type='text' readonly name='recipients'" . " value='" . $row['pseudo'] . "' class='senders' onclick='selectDest()'><br>";
+        if (isset($_GET['dest'])) {
+            echo "<input type='text' readonly name='recipientsOK[]'" . " value='" . $_GET['dest'] . "' class='senders cx-active'><br>";
+        } else {
+            foreach ($pdo->query("SELECT * FROM registration WHERE pseudo <> '$usrConnected'") as $row) {
+                echo "<input type='text' readonly name='recipients'" . " value='" . $row['pseudo'] . "' class='senders' onclick='selectDest()'><br>";
+            }
         }
         echo "</div><span id='arrow-top'>&#x25B2;</span><span id='arrow-bot'>&#x25BC;</span><div class='msg-window' autofocus>";
         echo "<textarea name='txtmessage' placeholder='Saisissez votre message...' autofocus></textarea>";
@@ -36,8 +39,6 @@
     <?php
     include './footer.php';
     ?>
-    
-    
 </body>
 
 </html>

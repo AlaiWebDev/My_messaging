@@ -3,6 +3,7 @@
 session_start();
 ?>
 <html lang="fr">
+
 <head>
     <?php
     include './head.php';
@@ -24,15 +25,15 @@ session_start();
         echo "<input type='password' id='pwd' name='pwd' class='login-input' autocomplete='off'>\n";
         echo "<button type='submit' class='btn'>Connexion</button><br>";
         echo "\n<span>Pas encore inscrit ? Cliquez <a href='./registration.php'>ici</a></span>\n";
-            if((isset($_GET['login'])) && ($_GET['login'] == 0)){
-                echo "<span id='log-unknown'>Pseudo ou mot de passe inconnu</span>\n</form>\n</div>";
-            }else {
-                if((isset($_GET['session'])) && ($_GET['session'] == 0)){
-                    echo $_GET['session'];
+        if ((isset($_GET['login'])) && ($_GET['login'] == 0)) {
+            echo "<span id='log-unknown'>Pseudo ou mot de passe inconnu</span>\n</form>\n</div>";
+        } else {
+            if ((isset($_GET['session'])) && ($_GET['session'] == 0)) {
+                echo $_GET['session'];
                 echo "<span id='log-unknown'>Votre session a expiré. Merci de vous reconnecter</span>\n</form>\n</div>";
-                }else
+            } else
                 echo "</form>\n</div>";
-            }
+        }
         ?>
     </div>
     <?php
@@ -40,4 +41,5 @@ session_start();
     ?>
     <script src="./assets/js/main.js"></script>
 </body>
+
 </html>

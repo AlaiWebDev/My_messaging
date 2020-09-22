@@ -18,7 +18,7 @@
         $pdo = Database::connect();
         $login = htmlentities(trim($_POST['login']));
         $pwd = $_POST['pwd'];
-        $sql = "SELECT ID, pseudo, pwd FROM registration WHERE pseudo = '$login'";
+        $sql = "SELECT ID, pseudo, pwd, types FROM registration WHERE pseudo = '$login'";
         $sth = $pdo->query($sql);
         $result = $sth->fetch(PDO::FETCH_ASSOC);
         $found = (empty($result['ID'])) ? false : $result['ID'];
@@ -29,8 +29,9 @@
             $hash = $result['pwd'];
             if (password_verify($pwd, $hash)) {
                 session_start();
-                setcookie("CookieUser", $login, time() + 600, "/");
-                header("Location: ./account.php");
+                $typ = $result['types'];
+                setcookie("CookieUser", $login, time() + 1200, "/");
+                header("Location: ./account.php?typ=$typ");
                 exit();
             } else {
                 header("Location: ./connect_user.php?login=0");
@@ -42,7 +43,6 @@
     <?php
     include './footer.php';
     ?>
-
     <script src="./assets/js/main.js"></script>
 </body>
 

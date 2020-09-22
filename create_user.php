@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <head>
-<?php
+    <?php
     include './head.php';
     ?>
 </head>
@@ -30,7 +30,7 @@
         include './function_connect.php';
         $pdo = Database::connect();
         $lastname = htmlentities(trim($_POST['lastname']));
-        $firstname = htmlentities(trim($_POST['firstname']));   
+        $firstname = htmlentities(trim($_POST['firstname']));
         $firstname = ucfirst(trim($firstname));
         $lastname = strtoupper($lastname);
         $pseudo = $_POST['pseudo'];
@@ -63,14 +63,12 @@
             }
         } else {
             echo "<script>document.getElementById('message').innerText='Cette adresse email est déjà associée à un compte. Choisissez-en une autre ou connectez-vous au compte concerné.'</script>";
-                echo "<script>document.getElementById('close').href='./registration.php';</script>";
-                echo "<script>document.getElementById('linkModal').click();</script>";
-                $pdo = Database::disconnect();
+            echo "<script>document.getElementById('close').href='./registration.php';</script>";
+            echo "<script>document.getElementById('linkModal').click();</script>";
+            $pdo = Database::disconnect();
         }
         ?>
-
     </div>
-
     <?php
     include './footer.php';
     ?>

@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    
     $("#arrow-bot").click(function() {
         $('#user-liste').animate({
             scrollTop: $("#user-liste").offset().top

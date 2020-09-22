@@ -8,7 +8,9 @@
 a:visited {
     color: unset;
   }
-body{
+body,html{
+    height: 100%;
+    min-height: 100%;
     margin: 0;
     background-color: dimgray;
 }
@@ -57,6 +59,7 @@ h3{
     margin-top: 200px;
     font-size: 1.5rem;
 }
+
 textarea{
     font-family: 'Source Code Pro', monospace;
     font-weight: 700;
@@ -71,9 +74,11 @@ textarea::placeholder{
     display: flex;
     flex-direction: column;
     margin:auto;
+    margin-top: 130px;
+    margin-bottom: 140px;
     align-items: center;
     width: 45%;
-    height: 60%;
+    min-height: 60%;
 }
 .screen-window h2{
     margin: auto;
@@ -199,6 +204,17 @@ h5{
     margin: auto;
     color:white;
 }
+.acc_infos{
+    border: 3px solid white;
+    border-radius:5px;
+    font-family: monospace;
+    font-size: 1.3rem;
+    background-color: lightgrey;
+    padding: 5px 10px 5px 10px;
+    margin:auto;
+    text-align: center;
+    box-shadow: 3px 3px 4px black;
+}
 .senders{
     background-color: silver;
     width:200px;
@@ -292,7 +308,7 @@ h5{
     text-decoration: none;
     margin: auto;
     width: 20%;
-    margin-top:0px;
+    margin-top:20px;
     height: fit-content;
     padding:10px;
     color:black;
@@ -305,6 +321,45 @@ h5{
     cursor: default;
 }
 .btn:hover{
+    background-color: rgb(148, 223, 36);
+    color:white;
+}
+.btn-new{
+    text-decoration: none;
+    margin: auto;
+    width: 25%;
+    margin-top:20px;
+    height: fit-content;
+    padding:10px;
+    color:black;
+    background-color: lightgray;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: larger;
+    font-weight: 800;
+    border-radius:10px;
+    cursor: default;
+}
+.btn-new:hover{
+    background-color: rgb(148, 223, 36);
+    color:white;
+}
+.btn-admin{
+    text-decoration: none;
+    margin: auto;
+    width: 25%;
+    height: fit-content;
+    padding:10px;
+    color:black;
+    background-color: lightgray;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: larger;
+    font-weight: 800;
+    border-radius:10px;
+    cursor: default;
+}
+.btn-admin:hover{
     background-color: rgb(148, 223, 36);
     color:white;
 }
@@ -439,6 +494,7 @@ h5{
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    justify-content: stretch;
     width:100vw;
     height: 80vh;
     border: 2px solid white;
@@ -514,6 +570,7 @@ h5{
 #youneedme{
     border-radius:10px;
 }
+
 .oModal {
     position: fixed;
     z-index: 99999;

@@ -7,13 +7,13 @@
     include './check_session.php';
     ?>
 </head>
+
 <body>
     <?php
     include_once './header_connected.php';
     ?>
     <div class="container">
         <?php
-        //$_POST['usr'] = $usrConnected;
         include './function_connect.php';
         $pdo = Database::connect();
         $usrConnected = $_COOKIE['CookieUser'];
@@ -22,14 +22,17 @@
         foreach ($pdo->query("SELECT * FROM chat WHERE pseudo = '$usrConnected' AND checked = 0") as $row) {
             echo "<script>newMessage()</script>";
         }
-
-        if (!isset($row)) {
-            echo "<h4 class='empty'>Pas de nouveau message</h4>";
+            echo "<h4 class='empty'>Bienvenue " . $usrConnected . "</h4>";
+            /*$sql = "SELECT types FROM registration WHERE pseudo = '$usrConnected'";*/
+            $sql = $pdo->prepare("SELECT types FROM registration WHERE pseudo = '$usrConnected'");
+            $sql->execute();
+            $result = $sql->fetch(PDO::FETCH_ASSOC);
+            if ($result['types'] == 0){
+            echo "<a href ='./mail.php' class='btn-admin'>Administrer les comptes</a>";
+            }
             echo "</div>";
+            print_r($_GET['typ']);
             echo "</form>";
-        } else {
-            echo "</div></form>";
-        }
         $pdo = Database::disconnect();
         ?>
     </div>

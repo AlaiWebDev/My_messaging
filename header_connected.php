@@ -1,10 +1,4 @@
 <?php
-//session_start();
-//if (isset($_SESSION['pseudo'])) {
-//    echo "Connecté en tant que" . $_SESSION['pseudo']. "</h2></b>";
-//} else {
-//    header('location: ./connect_user.php');
-//}
 $usrConnected = $_COOKIE['CookieUser'];
 echo "<header>";
 echo "<img id='logo' src='./assets/img/YouneedAlain.png' alt='YouNeedMe'>";
@@ -14,12 +8,14 @@ setlocale(LC_TIME, 'fr', 'fr_FR', 'fr_FR.ISO8859-1');
 $dateTimeZone = new DateTimeZone('Europe/Paris');
 $dateTime = new DateTime('now', $dateTimeZone);
 $today = strftime("%A %d %B %Y ") . $dateTime -> format('H\hi');
-echo "<span id='date-jour'>" . strftime("%A %d %B %Y") . "<br><span id='txt-uncapitalize'>Connecté en tant que <span id='account-connected'>" . $usrConnected  . "</span></span></span>";//"<br>" . $dateTime -> format('H\hi') . "</span>";
-//echo "<span >Connecté en tant que " . $usrConnected . "</span>";//"<br>" . $dateTime -> format('H\hi') . "</span>";
-echo "<a href ='./close_session.php' id='navbar-connect' class='cx-active'>DECONNEXION</a>";       
-echo "</navbar>"; 
 
-echo "<a href ='./user_account.php' id='user-account' class='cx-active'>Mon compte</a>";         
-//echo "<a href ='user_account.php' id='user-account' class='cx-active'>Mon compte</a>";         
+if ($_GET['typ'] == 0){
+echo "<span id='date-jour'>" . strftime("%A %d %B %Y") . "<br><span id='txt-uncapitalize'>Connecté en tant que Administrateur</span></span>";
+}else{
+    echo "<span id='date-jour'>" . strftime("%A %d %B %Y") . "<br><span id='txt-uncapitalize'>Connecté en tant que <br><span id='account-connected'>" . $usrConnected  . "</span></span></span>";
+}
+echo "<a href ='./manage_account.php' id='navbar-connect' class='cx-active'>Gérer mon compte</a>";
+echo "<a href ='./user_account.php' id='user-account' class='cx-active'>Boîte de réception</a>";
+echo "<a href ='./close_session.php' id='navbar-connect' class='cx-active'>DECONNEXION</a>";
+echo "</navbar>";    
 echo "</header>";
-
