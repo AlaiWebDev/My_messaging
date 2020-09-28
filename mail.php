@@ -18,7 +18,8 @@
         include './function_connect.php';
         $pdo = Database::connect();
         $usrConnected = $_COOKIE['CookieUser'];
-        echo "<form class='screen-window' action='./send_message.php' method='post'>";
+        $types = $_COOKIE['userTyp'];
+        echo "<form class='screen-window' action='./send_message.php?typ=$types' method='post'>";
         echo "<div class='chat-window'>";
         echo "<h4>Destinataire(s)</h4>";
         echo "<div class='user-list' id='user-liste'>";

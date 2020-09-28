@@ -44,12 +44,12 @@
         $sth = $pdo->query($sql);
         $result = $sth->fetch(PDO::FETCH_ASSOC);
         $found = (empty($result['ID'])) ? false : $result['ID'];
-        if ($found === false) {
+        if ($found == false) {
             $sql = ("SELECT * FROM registration WHERE  pseudo = '$pseudo'");
             $sth = $pdo->query($sql);
             $result = $sth->fetch(PDO::FETCH_ASSOC);
             $found = (empty($result['ID'])) ? false : $result['ID'];
-            if ($found === false) {
+            if ($found == false) {
                 $sql = "INSERT INTO registration(ID, nom, prenom, pseudo, email, pwd, types) VALUES ('0', '$lastname', '$firstname', '$pseudo', '$email', '$pwd', '1')";
                 $sth = $pdo->query($sql);
                 echo "<script>document.getElementById('message').innerText='Félicitations ! Votre compte a été créé. Vous pouvez vous connecter.'</script>";
@@ -72,8 +72,8 @@
     <?php
     include './footer.php';
     ?>
-    <script src="./assets/js/jquery-3.2.1.js"></script>
-    <script src="./assets/js/main.js"></script>
+    
+
 </body>
 
 </html>

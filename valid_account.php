@@ -22,16 +22,25 @@
         $sth = $pdo->query($sql);
         $result = $sth->fetch(PDO::FETCH_ASSOC);
         $found = (empty($result['ID'])) ? false : $result['ID'];
-        if ($found === false) {
+        if ($found == false) {
             $pdo = Database::disconnect();
             header("Location: ./connect_user.php?login=0");
         } else {
+            $types = $result['types'];
             $hash = $result['pwd'];
+            
             if (password_verify($pwd, $hash)) {
                 session_start();
-                $typ = $result['types'];
-                setcookie("CookieUser", $login, time() + 1200, "/");
-                header("Location: ./account.php?typ=$typ");
+                if ($types == 0) {
+                    setcookie("CookieUser", $login, time() + 3000, "/");
+                    setcookie("userTyp", $types, time() + 3000, "/");
+                    
+                }
+                else{
+                    setcookie("CookieUser", $login, time() + 1200, "/");
+                    setcookie("userTyp", $types, time() + 3000, "/");
+                }
+                header("Location: ./account.php?typ=$types");
                 exit();
             } else {
                 header("Location: ./connect_user.php?login=0");
@@ -43,7 +52,7 @@
     <?php
     include './footer.php';
     ?>
-    <script src="./assets/js/main.js"></script>
+    
 </body>
 
 </html>

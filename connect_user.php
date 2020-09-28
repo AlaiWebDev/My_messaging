@@ -39,7 +39,6 @@ session_start();
     <?php
     include './footer.php';
     ?>
-    <script src="./assets/js/main.js"></script>
 </body>
 
 </html>

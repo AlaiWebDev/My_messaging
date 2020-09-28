@@ -11,6 +11,7 @@
 <body>
     <?php
     $userconnected = $_COOKIE['CookieUser'];
+    $types = $_COOKIE['userTyp'];
     include './header_connected.php';
     ?>
     <div class="container">
@@ -22,7 +23,7 @@
         foreach ($array as $value) {
             $msgTxt = htmlentities(trim($_POST['txtmessage']));
             $dest = $_POST['recipientsOK'];
-            if ($value === "recipientsOK") {
+            if ($value == "recipientsOK") {
                 for ($i = 0; $i < count($dest); $i++) {
                     $msg = $msgTxt;
                     $desti = $dest[$i];
@@ -42,7 +43,6 @@
     <?php
     include './footer.php';
     ?>
-    <script src="./assets/js/main.js"></script>
 </body>
 
 </html>
