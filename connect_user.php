@@ -6,13 +6,13 @@ session_start();
 
 <head>
     <?php
-    include './head.php';
+    include './includes/head.php';
     ?>
 </head>
 
 <body>
     <?php
-    include './header.php';
+    include './includes/header.php';
     ?>
     <div class="container">
         <?php
@@ -37,7 +37,7 @@ session_start();
         ?>
     </div>
     <?php
-    include './footer.php';
+    include './includes/footer.php';
     ?>
 </body>
 

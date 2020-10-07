@@ -3,13 +3,13 @@
 
 <head>
 <?php
-    include './head.php';
+    include './includes/head.php';
     ?>
 </head>
 
 <body>
     <?php
-    include './header.php';
+    include './includes/header.php';
     ?>
     <div class="container">
         <?php
@@ -28,7 +28,7 @@
         ?>
     </div>
     <?php
-    include './footer.php';
+    include './includes/footer.php';
     ?>
 </body>
 

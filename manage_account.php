@@ -3,18 +3,18 @@
 
 <head>
     <?php
-    include './head.php';
-    include './check_session.php';
+    include './includes/head.php';
+    include './includes/check_session.php';
     ?>
 </head>
 
 <body>
     <?php
-    include_once './header_connected.php';
+    include_once './includes/header_connected.php';
     ?>
     <div class="container">
         <?php
-        include './function_connect.php';
+        include './includes/database.php';
         $pdo = Database::connect();
         $usrConnected = $_COOKIE['CookieUser'];
         $types = $_COOKIE['userTyp'];
@@ -27,12 +27,13 @@
             echo "<p><a href ='./update_account.php?typ=$types' class='btn'>Modifier mon mot de passe</a></p>";
             if ($row['types'] == 0) echo "<p><a href ='./admin.php?$types' class='btn'>Interface Admin</a></p>";
         }
+        $pdo = Database::disconnect();
         echo "</div>";
         echo "</form>";
         ?>
     </div>
     <?php
-    include './footer.php';
+    include './includes/footer.php';
     ?>
 </body>
 

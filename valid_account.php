@@ -3,18 +3,18 @@
 
 <head>
     <?php
-    include './head.php';
-    include './check_session.php';
+    include './includes/head.php';
+    include './includes/check_session.php';
     ?>
 </head>
 
 <body>
     <?php
-    include './header.php';
+    include './includes/header.php';
     ?>
     <div class="container">
         <?php
-        include './function_connect.php';
+        include './includes/database.php';
         $pdo = Database::connect();
         $login = htmlentities(trim($_POST['login']));
         $pwd = $_POST['pwd'];
@@ -50,7 +50,7 @@
         ?>
     </div>
     <?php
-    include './footer.php';
+    include './includes/footer.php';
     ?>
     
 </body>

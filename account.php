@@ -3,18 +3,18 @@
 
 <head>
     <?php
-    include './head.php';
-    include './check_session.php';
+    include './includes/head.php';
+    include './includes/check_session.php';
     ?>
 </head>
 
 <body>
     <?php
-    include './header_connected.php';
+    include './includes/header_connected.php';
     ?>
     <div class="container">
         <?php
-        include './function_connect.php';
+        include './includes/database.php';
         $pdo = Database::connect();
         $usrConnected = $_COOKIE['CookieUser'];
         $types = $_COOKIE['userTyp'];
@@ -38,10 +38,10 @@
         ?>
     </div>
     <?php
-    include './footer.php';
+    include './includes/footer.php';
     ?>
     <script type="text/javascript" src="./assets/js/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="./assets/js/jquery.scrollTo-min.js"></script>
+    
 
 </body>
 

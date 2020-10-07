@@ -3,8 +3,8 @@
 
 <head>
     <?php
-    include './head.php';
-    include './check_session.php';
+    include './includes/head.php';
+    include './includes/check_session.php';
     ?>
 </head>
 
@@ -12,11 +12,11 @@
     <?php
     $userconnected = $_COOKIE['CookieUser'];
     $types = $_COOKIE['userTyp'];
-    include './header_connected.php';
+    include './includes/header_connected.php';
     ?>
     <div class="container">
         <?php
-        include './function_connect.php';
+        include './includes/database.php';
         $pdo = Database::connect();
         $array = array_keys($_POST);
         $OKString = "OK";
@@ -41,7 +41,7 @@
         ?>
     </div>
     <?php
-    include './footer.php';
+    include './includes/footer.php';
     ?>
 </body>
 

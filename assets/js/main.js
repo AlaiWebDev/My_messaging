@@ -1,5 +1,3 @@
-
-
 function userCreated() {
   document.getElementById("linkModal").click();
 }
@@ -28,14 +26,32 @@ function digestMessage(message) {
 function createpwdCookie(data) {
   document.cookie = 'motdepasse=' + data + '; path=/; max-age=3600';
 }
+function showForm() {
+  document.getElementById('pwdconfirm').classList.replace('none', 'flex');
+  /*event = event || window.event;
+  e.preventDefault();*/
+  return false;
+}
 function promptDeleteUser() {
   let answer = prompt("Entrer votre mot de passe Administrateur pour confirmer la suppression du compte");
   const encoder2 = new TextEncoder();
   const data2 = encoder2.encode(answer);
   //const hash = crypto.subtle.digest('SHA-256', data);
-  getCookie('motdepasse');
+  mycookie = getCookie('motdepasse');
+  console.log(answer);
+
+  /* Requete AJAX
+  /*let xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    console.log(this);
+  }
+  let data = new FormData();
+  data.append('answer', answer);
+  xhr.open('POST', './admin.php', true);
+  xhr.send(data);*/
   console.log(mycookie);
   console.log(data2);
+  return false;
 }
   /*var promise = new Promise((resolve, reject) => {
     chrome.cookies.getAll({"url":"http://localhost"}, function (cookies) {

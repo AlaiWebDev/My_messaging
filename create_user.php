@@ -3,7 +3,7 @@
 
 <head>
     <?php
-    include './head.php';
+    include './includes/head.php';
     ?>
 </head>
 
@@ -23,11 +23,11 @@
     </div>
     <a href="#oModal" id="linkModal">Ouvrir le popup</a>
     <?php
-    include './header.php';
+    include './includes/header.php';
     ?>
     <div class="container">
         <?php
-        include './function_connect.php';
+        include './includes/database.php';
         $pdo = Database::connect();
         $lastname = htmlentities(trim($_POST['lastname']));
         $firstname = htmlentities(trim($_POST['firstname']));
@@ -50,11 +50,16 @@
             $result = $sth->fetch(PDO::FETCH_ASSOC);
             $found = (empty($result['ID'])) ? false : $result['ID'];
             if ($found == false) {
-                $sql = "INSERT INTO registration(ID, nom, prenom, pseudo, email, pwd, types) VALUES ('0', '$lastname', '$firstname', '$pseudo', '$email', '$pwd', '1')";
+                if (filter_var($email, FILTER_VALIDATE_EMAIL)){
+                $sql = "INSERT INTO registration(ID, nom, prenom, pseudo, email, pwd, types, register_date) VALUES ('0', '$lastname', '$firstname', '$pseudo', '$email', '$pwd', '1', '$today')";
                 $sth = $pdo->query($sql);
                 echo "<script>document.getElementById('message').innerText='Félicitations ! Votre compte a été créé. Vous pouvez vous connecter.'</script>";
                 echo "<script>document.getElementById('linkModal').click();</script>";
                 $pdo = Database::disconnect();
+            }else {echo "<script>document.getElementById('message').innerText='Votre email n\'est pas valide'</script>";
+                echo "<script>document.getElementById('close').href='./registration.php';</script>";
+                echo "<script>document.getElementById('linkModal').click();</script>";
+                $pdo = Database::disconnect();}
             } else {
                 echo "<script>document.getElementById('message').innerText='Ce pseudo est déjà pris.'</script>";
                 echo "<script>document.getElementById('close').href='./registration.php';</script>";
@@ -70,7 +75,7 @@
         ?>
     </div>
     <?php
-    include './footer.php';
+    include './includes/footer.php';
     ?>
     
 

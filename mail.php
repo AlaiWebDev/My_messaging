@@ -3,19 +3,19 @@
 
 <head>
     <?php
-    include './head.php';
-    include './check_session.php';
+    include './includes/head.php';
+    include './includes/check_session.php';
     ?>
 </head>
 
 <body>
     <?php
-    include_once './header_connected.php';
+    include_once './includes/header_connected.php';
     ?>
     <div class="container">
         <?php
         //$_POST['usr'] = $usrConnected;
-        include './function_connect.php';
+        include './includes/database.php';
         $pdo = Database::connect();
         $usrConnected = $_COOKIE['CookieUser'];
         $types = $_COOKIE['userTyp'];
@@ -30,6 +30,7 @@
                 echo "<input type='text' readonly name='recipients'" . " value='" . $row['pseudo'] . "' class='senders' onclick='selectDest()'><br>";
             }
         }
+        $pdo = Database::disconnect();
         echo "</div><span id='arrow-top'>&#x25B2;</span><span id='arrow-bot'>&#x25BC;</span><div class='msg-window' autofocus>";
         echo "<textarea name='txtmessage' placeholder='Saisissez votre message...' autofocus></textarea>";
         echo "</div></div>";
@@ -38,7 +39,7 @@
         ?>
     </div>
     <?php
-    include './footer.php';
+    include './includes/footer.php';
     ?>
 </body>
 

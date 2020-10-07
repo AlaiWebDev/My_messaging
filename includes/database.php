@@ -26,5 +26,9 @@
         {
             self::$cont = null;
         }
+        public static function update($connexionBDD, $table ,$array, $key, $value)
+        {
+            $request = "UPDATE $table SET $array WHERE $key = $value";
+        }
     }
 ?>

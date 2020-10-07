@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  /*border:1px solid red;*/
+  /*border:1px solid #ff0000;*/
   user-select: none;
 }
 
@@ -93,6 +93,9 @@ textarea::placeholder {
 }
 .none {
   display: none;
+}
+.flex{
+  display:flex;
 }
 
 #logo {
@@ -211,10 +214,16 @@ h5 {
   margin: auto;
   color: #ffffff;
 }
+.manage-acc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
 .admin-user-list {
   display: flex;
   flex-direction: column;
-  width: 15%;
   height: 70%;
   padding: 10px;
   margin-top: 30px;
@@ -280,8 +289,6 @@ option:active {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  width: 30%;
-  height: 70%;
   padding: 10px;
   margin-top: 25px;
   align-items: center;
@@ -290,11 +297,11 @@ option:active {
   color: #ffffff;
 }
 
-.admin-users-datas input,
-button {
+.admin-users-datas input {
   background-color: #ffffff;
   width: 300px;
   margin: auto;
+  margin-bottom: 30px;
   text-align: center;
   font-weight: 900;
   font-size: 1.2rem;
@@ -302,8 +309,79 @@ button {
   border: 2px solid #ffffff;
   border-radius: 5px;
   cursor: default;
+  user-select: none;
 }
-
+.checkpwd {
+  position: absolute;
+  align-items: center;
+  flex-direction: column;
+  width: 25rem;
+  height: 15rem;
+  color: black !important;
+  background-color: white;
+  border: 3px solid black;
+  border-radius: 10px;
+  top: 40%;
+  left: 40%;
+}
+.checkpwd h4{
+  color:black;
+  width:60%;
+  margin-bottom: 3rem;
+}
+.checkpwd input{
+  border: 2px solid black;
+}
+.checkpwd a{
+  text-decoration: none;
+  margin: auto;
+  margin-top: 20px;
+  height: fit-content;
+  padding: 10px;
+  color: #000000;
+  background-color: #b4b3b3;
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: larger;
+  font-weight: 800;
+  border-radius: 10px;
+  cursor: default;
+  /*margin: 15px 1rem 0px 1rem;*/
+}
+.change-pwd{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  padding: 10px;
+  margin:auto;
+  margin-top: 25px;
+  align-items: center;
+  background-color: #bebebe;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  color: #ffffff;
+}
+.change-pwd button, input{
+  text-decoration: none;
+  margin: auto;
+  width: 20%;
+  margin-top: 20px;
+  height: fit-content;
+  padding: 10px;
+  color: #000000;
+  background-color: #f5efef;
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: larger;
+  font-weight: 800;
+  border-radius: 10px;
+  cursor: default;
+}
+.change-pwd button:hover{
+  color:white;
+  background-color:  #94df24;
+}
 .acc_infos {
   border: 3px solid #ffffff;
   border-radius: 5px;

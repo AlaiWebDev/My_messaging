@@ -2,5 +2,5 @@
 session_start();
 $_SESSION = array();
 session_destroy();
-header("Location: connect_user.php");
+header("Location: ./connect_user.php");
 ?>

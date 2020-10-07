@@ -3,69 +3,63 @@
 
 <head>
     <?php
-    include './head.php';
-    include './check_session.php';
+    include './includes/head.php';
+    include './includes/check_session.php';
     ?>
 </head>
 
 <body>
     <?php
-    include_once './header_connected.php';
+    include_once './includes/header_connected.php';
     ?>
     <main>
         <?php
-        include './function_connect.php';
+        include './includes/database.php';
         $pdo = Database::connect();
         $usrConnected = $_COOKIE['CookieUser'];
         $types = $_COOKIE['userTyp'];
-        echo "<h2>Gestion des comptes utilisateurs</h2>";
-        echo "<form class='admin-users' method='post'>";
-        echo "<div class=admin-user-list>";
-        echo "<label for='usr-select'>Sélection utilisateur</label>";
-        echo "<select name='usr' id='usr-select' onfocus='this.size=10;' onblur='this.size=0;' 
-        onchange='this.size=1; this.blur();'>";
-        echo "<option id='choice' value=''>Sélection utilisateur </option>";
-        $index = 0;
-        foreach ($pdo->query("SELECT * FROM registration WHERE pseudo <> '$usrConnected' ORDER BY pseudo ASC") as $row) {
-            echo "<option value='" . $row['pseudo'] . "'>" . $row['pseudo'] . "</option>";
-            //$usersArray[$index] = array($row['pseudo'] => array($row['nom'],$row['prenom'],$row['email']));
-            $userArray[$index] = ['pseudo' => [$row['pseudo'], 'nom' => $row['nom'], 'prenom' => $row['prenom'], 'email' => $row['email']]];
-            $index++;
+        $sth = $pdo->prepare("SELECT * FROM registration WHERE pseudo = '$usrConnected'");
+        $sth->execute();
+        $result = $sth->fetch(PDO::FETCH_ASSOC);
+        $pdo = Database::disconnect();
+        echo "<h2>Modification du mot de passe de connexion</h2>";
+        echo "<form method='post'>";
+        echo "<div class='change-pwd'>";
+        echo "<input name='pwd' type='text' placeholder='Mot de passe actuel'></input>";
+        echo "<input name='pwd1' type='text' placeholder='Nouveau mot de passe'></input>";
+        echo "<input name='pwd2' type='text' placeholder='Nouveau mot de passe'></input>";
+        echo "<button name='confirm'>VALIDER</button>";
+        
+        if (isset($_POST['confirm'])) {
+            if ($_POST['pwd1'] == $_POST['pwd2']) {
+                $hash = $result['pwd'];
+                $pwd = $_POST['pwd'];
+                $newpwd = $_POST['pwd1'];
+                if (password_verify($pwd, $hash)) {
+                    $options = [
+                        'cost' => 12,
+                    ];
+                    $newpwd = password_hash($newpwd, PASSWORD_BCRYPT, $options);
+                    $pdo = Database::connect();
+                    $sth = $pdo->prepare("UPDATE registration SET pwd = '$newpwd' WHERE pseudo = '$usrConnected'");
+                    $sth->execute();
+                    $pdo = Database::disconnect();
+                    echo "<p>Votre mot de passe a bien été modifié</p>";
+                }else{
+                echo "<p>Mot de passe actuel incorrect</p>";
+                }
+            }else{
+                echo "<p><strong>Les 2 mots de passe ne correspondant pas</strong></p>";
+            }
         }
-        echo "</select>";
         echo "</div>";
-        echo "<button class='btnShowUserItems' type='submit'>Afficher détails</button>";
-        /*for ($i = 0; $i < count($userArray); $i++) {
-            //print_r($userArray[$i]);
-            echo "<br>";
-            print_r($userArray[$i]['pseudo']);
-        }*/
-        $user = "";
+        echo "</form>";
         ?>
         <?php
-        print_r($user);
-        if (isset($_POST['usr'])){
-            $user=$_POST['usr'];
-            $sth = $pdo->prepare("SELECT * FROM registration WHERE pseudo = '$user'");
-            $sth->execute();
-            $result = $sth->fetch(PDO::FETCH_ASSOC);
-            echo "<div class='admin-users-datas' id='users-datas'>";
-            echo "<span>NOM : " . $result['nom'] . "</span>";
-            echo "<input name='nom' type='text' value='" . $result['nom'] . "'>";
-            echo "<span>PRENOM : " . $result['prenom'] . "</span>";
-            echo "<input name='prenom'  type='text' value='" . $result['prenom'] . "'>";
-            echo "<span>EMAIL: " . $result['email'] . "</span>";
-            echo "<input name='email'  type='text' value='" . $result['email'] . "'>";
-            echo "<span class='btnShowUserItems' onclick'='./update_account.php''>Mettre à jour</span>";
-            echo "<span class='btnShowUserItems' onclick=promptDeleteUser()>Supprimer le compte</span>";
-            echo "</div>";
-            echo "</form>";
-            echo "<script>document.querySelector('.admin-users-datas').style.display='flex';</script>";
-        }
         ?>
     </main>
     <?php
-    include './footer.php';
+    include './includes/footer.php';
     ?>
 </body>
 

@@ -3,22 +3,25 @@
 
 <head>
     <?php
-    include './head.php';
-    include './check_session.php';
+    include './includes/head.php';
+    include './includes/check_session.php';
     ?>
 </head>
 
 <body>
     <?php
-    include_once './header_connected.php';
+    include_once './includes/header_connected.php';
     ?>
     <main>
+
         <?php
-        include './function_connect.php';
+
+        include './includes/database.php';
         $pdo = Database::connect();
         $usrConnected = $_COOKIE['CookieUser'];
         $types = $_COOKIE['userTyp'];
         echo "<h2>Gestion des comptes utilisateurs</h2>";
+        echo "<div class='manage-acc'>";
         echo "<form class='admin-users' method='post'>";
         echo "<div class=admin-user-list>";
         echo "<label for='usr-select'>Sélection utilisateur</label>";
@@ -28,47 +31,107 @@
         $index = 0;
         foreach ($pdo->query("SELECT * FROM registration WHERE pseudo <> '$usrConnected' ORDER BY pseudo ASC") as $row) {
             echo "<option value='" . $row['pseudo'] . "'>" . $row['pseudo'] . "</option>";
-            //$usersArray[$index] = array($row['pseudo'] => array($row['nom'],$row['prenom'],$row['email']));
             $userArray[$index] = ['pseudo' => [$row['pseudo'], 'nom' => $row['nom'], 'prenom' => $row['prenom'], 'email' => $row['email']]];
             $index++;
         }
+        Database::disconnect();
         echo "</select>";
         echo "</div>";
-        echo "<button class='btnShowUserItems' type='submit'>Afficher détails</button>";
-        /*for ($i = 0; $i < count($userArray); $i++) {
-            //print_r($userArray[$i]);
-            echo "<br>";
-            print_r($userArray[$i]['pseudo']);
-        }*/
+        echo "<input name='submit' class='btnShowUserItems' type='submit' value='Afficher détails'></input>";
         $user = "";
         ?>
         <?php
-        print_r($user);
-        if (isset($_POST['usr'])){
-            $user=$_POST['usr'];
+        if (isset($_POST['usr']) && isset($_POST['submit'])) {
+            $pdo = Database::connect();
+            $user = $_POST['usr'];
             $sth = $pdo->prepare("SELECT * FROM registration WHERE pseudo = '$user'");
             $sth->execute();
             $result = $sth->fetch(PDO::FETCH_ASSOC);
+            Database::disconnect();
+            echo "<form method='post'>";
             echo "<div class='admin-users-datas' id='users-datas'>";
+            echo "<span>PSEUDO : " . $result['pseudo'] . "</span>";
+            echo "<input name='pseudo' type='text' value='" . $result['pseudo'] . "'>";
             echo "<span>NOM : " . $result['nom'] . "</span>";
             echo "<input name='nom' type='text' value='" . $result['nom'] . "'>";
             echo "<span>PRENOM : " . $result['prenom'] . "</span>";
             echo "<input name='prenom'  type='text' value='" . $result['prenom'] . "'>";
             echo "<span>EMAIL: " . $result['email'] . "</span>";
             echo "<input name='email'  type='text' value='" . $result['email'] . "'>";
-            echo "<span class='btnShowUserItems' onclick'='./update_account.php''>Mettre à jour</span>";
-            echo "<span class='btnShowUserItems' onclick='f=window.open('index.php','fenetre','width=800, height=600, top=30, left=50')'>Supprimer le compte</span>";
-            function popup(){
-                echo"";
-            }
-            echo "</div>";
-            echo "</form>";
-            echo "<script>document.querySelector('.admin-users-datas').style.display='flex';</script>";
+            echo "<input type='submit' name='update' class='btnShowUserItems' value='Mettre à jour'></input>";
+            echo "<button name='delete' onclick='return showForm()' class='btnShowUserItems'>Supprimer le compte</button>";
         }
+
+        if (isset($_POST['update'])) {
+            $user = $_POST['pseudo'];
+            $nom = htmlentities(trim($_POST['nom']));
+            $prenom = htmlentities(trim($_POST['prenom']));
+            $email = $_POST['email'];
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $pdo = Database::connect();
+                $sth = $pdo->prepare("UPDATE registration
+                SET nom = '$nom', prenom = '$prenom', email = '$email' WHERE pseudo = '$user'");
+                $sth->execute();
+                $pdo = Database::disconnect();
+                $pdo = Database::connect();
+                $sth = $pdo->prepare("SELECT * FROM registration WHERE pseudo = '$user'");
+                $sth->execute();
+                $result = $sth->fetch(PDO::FETCH_ASSOC);
+                Database::disconnect();
+                echo "<div class='admin-users-datas'>";
+                echo "<span>NOM : " . $result['pseudo'] . "</span>";
+                echo "<input name='pseudo' readonly type='text' value='" . $result['pseudo'] . "'>";
+                echo "<span>NOM : " . $result['nom'] . "</span>";
+                echo "<input name='nom' type='text' value='" . $result['nom'] . "'>";
+                echo "<span>PRENOM : " . $result['prenom'] . "</span>";
+                echo "<input name='prenom'  type='text' value='" . $result['prenom'] . "'>";
+                echo "<span>EMAIL: " . $result['email'] . "</span>";
+                echo "<input name='email'  type='text' value='" . $result['email'] . "'>";
+                echo "<input type='submit' name='update' class='btnShowUserItems' value='Mettre à jour'></input>";
+                echo "<button onclick='return showForm()' name='delete' class='btnShowUserItems'>Supprimer le compte</button>";
+                $successMessage = "Les modifications ont été enregistrées";
+            } else $errorMessage = "Votre email n'est pas valide";
+        }
+        echo "<div class='checkpwd none' id='pwdconfirm'>";
+        echo "<h4>Entrez votre mot de passe ADMINISTRATEUR pour confirmer la suppression</h4>";
+        echo "<input name='adminpwd' type='password'></input><br>";
+        echo "<button name='confirm' class='btn' type='submit'>VALIDER</button>";
+        echo "</form>";
+        if (isset($_POST['confirm'])){
+            echo "<script>alert('test,$usrConnected')</script>";
+            // echo "<script>alert('test,$usrConnected,$mdpadmin,$mdpsaisie')</script>";
+            $pdo = Database::connect();
+                $sth = $pdo->prepare("SELECT * FROM registration WHERE pseudo = '$usrConnected'");
+                $sth->execute();
+                $result = $sth->fetch(PDO::FETCH_ASSOC);
+                $mdpsaisie=$_POST['adminpwd'];
+                $mdpadmin = $result['pwd'];
+                echo "<script>alert('test,$usrConnected,$mdpadmin,$mdpsaisie')</script>";
+                Database::disconnect();
+                print_r(password_verify($_POST['adminpwd'], $result['pwd']));
+            if (password_verify($mdpsaisie, $mdpadmin)) {
+            $pdo = Database::connect();
+                $sth = $pdo->prepare("DELETE FROM registration WHERE pseudo = '$user'");
+                $sth->execute();
+                $pdo = Database::disconnect();
+                // header("location:./admin.PHP");
+            }else{
+            }
+        }else{
+            
+        }
+        
+        echo "</div>";
+        echo "</div>";
+        echo "</div>";
+        echo "<script>document.querySelector('.admin-users-datas').style.display='flex';</script>";
         ?>
+        <?php
+        ?>
+    
     </main>
     <?php
-    include './footer.php';
+    include './includes/footer.php';
     ?>
 </body>
 
