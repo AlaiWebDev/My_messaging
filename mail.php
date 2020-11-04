@@ -31,12 +31,13 @@
             }
         }
         $pdo = Database::disconnect();
-        echo "</div><span id='arrow-top'>&#x25B2;</span><span id='arrow-bot'>&#x25BC;</span><div class='msg-window' autofocus>";
-        echo "<textarea name='txtmessage' placeholder='Saisissez votre message...' autofocus></textarea>";
-        echo "</div></div>";
-        echo "<button class='btn'>ENVOYER</button>";
-        echo "</form>";
         ?>
+        </div><span id="arrow-top">&#x25B2;</span><span id="arrow-bot">&#x25BC;</span><div class="msg-window" autofocus>
+        <textarea name="txtmessage" placeholder="Saisissez votre message..." autofocus></textarea>
+        </div></div>
+        <button class="btn">ENVOYER</button>
+        </form>
+        
     </div>
     <?php
     include './includes/footer.php';

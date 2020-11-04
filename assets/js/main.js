@@ -28,18 +28,14 @@ function createpwdCookie(data) {
 }
 function showForm() {
   document.getElementById('pwdconfirm').classList.replace('none', 'flex');
-  /*event = event || window.event;
-  e.preventDefault();*/
   return false;
 }
 function promptDeleteUser() {
   let answer = prompt("Entrer votre mot de passe Administrateur pour confirmer la suppression du compte");
   const encoder2 = new TextEncoder();
   const data2 = encoder2.encode(answer);
-  //const hash = crypto.subtle.digest('SHA-256', data);
   mycookie = getCookie('motdepasse');
   console.log(answer);
-
   /* Requete AJAX
   /*let xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
@@ -53,24 +49,6 @@ function promptDeleteUser() {
   console.log(data2);
   return false;
 }
-  /*var promise = new Promise((resolve, reject) => {
-    chrome.cookies.getAll({"url":"http://localhost"}, function (cookies) {
-        var found = false;
-        for(var i = 0; i < cookies.length; i++){
-            var name = cookies[i].name
-            // console.log(name)
-            if (name === 'motdepasse') {
-                console.log(name) // line 13
-                cookiepwd = cookies[i].value
-              found = true;
-            }
-        }
-        if (found) resolve("Cookies Found");
-        else reject("no cookies found");
-    });
-  })
-}*/
-
 function getCookie(cname){                                                                      
   var name = cname + "=";                                                         
   var carray = document.cookie.split(";");                                        

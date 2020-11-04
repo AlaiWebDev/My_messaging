@@ -41,8 +41,6 @@
     include './includes/footer.php';
     ?>
     <script type="text/javascript" src="./assets/js/jquery-3.2.1.js"></script>
-    
-
 </body>
 
 </html>

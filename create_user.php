@@ -36,7 +36,7 @@
         $pseudo = $_POST['pseudo'];
         $email = $_POST['email'];
         $options = [
-            'cost' => 12,
+            'cost' => 17,
         ];
         $pwd = $_POST['pwd'];
         $pwd = password_hash($pwd, PASSWORD_BCRYPT, $options);

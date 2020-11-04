@@ -13,9 +13,7 @@
     include_once './includes/header_connected.php';
     ?>
     <main>
-
         <?php
-
         include './includes/database.php';
         $pdo = Database::connect();
         $usrConnected = $_COOKIE['CookieUser'];
@@ -97,30 +95,28 @@
         echo "<input name='adminpwd' type='password'></input><br>";
         echo "<button name='confirm' class='btn' type='submit'>VALIDER</button>";
         echo "</form>";
-        if (isset($_POST['confirm'])){
+        if (isset($_POST['confirm'])) {
             echo "<script>alert('test,$usrConnected')</script>";
             // echo "<script>alert('test,$usrConnected,$mdpadmin,$mdpsaisie')</script>";
             $pdo = Database::connect();
-                $sth = $pdo->prepare("SELECT * FROM registration WHERE pseudo = '$usrConnected'");
-                $sth->execute();
-                $result = $sth->fetch(PDO::FETCH_ASSOC);
-                $mdpsaisie=$_POST['adminpwd'];
-                $mdpadmin = $result['pwd'];
-                echo "<script>alert('test,$usrConnected,$mdpadmin,$mdpsaisie')</script>";
-                Database::disconnect();
-                print_r(password_verify($_POST['adminpwd'], $result['pwd']));
+            $sth = $pdo->prepare("SELECT * FROM registration WHERE pseudo = '$usrConnected'");
+            $sth->execute();
+            $result = $sth->fetch(PDO::FETCH_ASSOC);
+            $mdpsaisie = $_POST['adminpwd'];
+            $mdpadmin = $result['pwd'];
+            echo "<script>alert('test,$usrConnected,$mdpadmin,$mdpsaisie')</script>";
+            Database::disconnect();
+            print_r(password_verify($_POST['adminpwd'], $result['pwd']));
             if (password_verify($mdpsaisie, $mdpadmin)) {
-            $pdo = Database::connect();
+                $pdo = Database::connect();
                 $sth = $pdo->prepare("DELETE FROM registration WHERE pseudo = '$user'");
                 $sth->execute();
                 $pdo = Database::disconnect();
                 // header("location:./admin.PHP");
-            }else{
+            } else {
             }
-        }else{
-            
+        } else {
         }
-        
         echo "</div>";
         echo "</div>";
         echo "</div>";
@@ -128,7 +124,6 @@
         ?>
         <?php
         ?>
-    
     </main>
     <?php
     include './includes/footer.php';
